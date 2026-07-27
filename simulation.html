@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Match Setup</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-dark text-white p-5">
+    <div class="container border p-4 rounded bg-secondary">
+        <h2 class="text-center">Start New Simulation</h2>
+        <form action="/startMatch" method="POST">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Home Team</h3>
+                    <input type="text" name="homeTeamSearch" class="form-control" placeholder="Search Team (e.g. Arsenal)">
+                    <label class="mt-2">Formation:</label>
+                    <select name="homeFormation" class="form-select">
+                        <option value="4-3-3">4-3-3</option>
+                        <option value="4-4-2">4-4-2</option>
+                        <option value="3-5-2">3-5-2</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <h3>Away Team</h3>z
+                    <input type="text" name="awayTeamSearch" class="form-control" placeholder="Search Team (e.g. Milan)">
+                    <label class="mt-2">Formation:</label>
+                    <select name="awayFormation" class="form-select">
+                        <option value="4-3-3">4-3-3</option>
+                        <option value="4-4-2">4-4-2</option>
+                        <option value="3-5-2">3-5-2</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-4">Generate Match</button>
+        </form>
+    </div>
+</body>
+</html>

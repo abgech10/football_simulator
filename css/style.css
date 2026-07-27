@@ -1,0 +1,167 @@
+/* Reset & base */
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #2b4158;
+  --ink: #222;
+  --nav-gradient: linear-gradient(90deg, #0f1012 0%, #3a3f46 100%);
+  --muted: #6b7280;
+  --brand: #f9c23c;
+  --brand-ink: #111;
+  --card: #fff;
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+html { scroll-behavior:smooth; }
+body{
+  background:var(--bg); color:var(--ink);
+  font-family: 'Poppins', Arial, sans-serif;
+  display:flex; flex-direction:column; min-height:100vh;
+}
+a{ color:inherit; text-decoration:none; }
+.container{ width:min(1100px,92%); margin-inline:auto; }
+
+/* Navbar (flex) */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background: var(--nav-gradient);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  
+}
+
+/* Logo with image via ::before */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-weight: 700;
+  letter-spacing: .2px;
+  color: #fff;
+  font-size: larger;
+  line-height: 1;
+}
+.logo::after {
+  content: "";
+  width: 40px;        /* tighter size so navbar height stays nice */
+  height: 40px;
+  background: url('../assets/images/logo.jpg') center/contain no-repeat;
+  display: inline-block;
+  margin-left: .6rem;
+  border-radius: 6px; /* keep if you like rounded corners */
+  opacity: 1;         /* full color */
+  mix-blend-mode: normal;  /* removes blending now that background is gone */        /* subtle see-through vibe; set 1 for solid */
+}
+
+/* Nav links */
+.nav-links{ list-style:none; display:flex; align-items:center; gap:1rem; }
+.nav-links a{
+  color:#fff; font-weight:600; padding:.55rem .8rem; border-radius:999px; transition:.2s;
+}
+.nav-links a:hover,
+.nav-links a[aria-current="page"]{ background:rgba(255,255,255,.12); }
+
+/* Hamburger */
+.hamburger{ display:none; background:transparent; border:0; padding:.4rem; cursor:pointer; }
+.hamburger span{ display:block; width:24px; height:2px; background:#fff; margin:5px 0; }
+
+/* Hero */
+.hero{
+  min-height:70vh; display:grid; place-items:center; text-align:center;
+  background: radial-gradient(1100px 600px at 70% -10%, #ffd54a22, transparent 60%),
+              radial-gradient(1100px 600px at 0% 120%, #60a5fa22, transparent 60%),
+              url('../assets/images/hero.png') center/cover no-repeat;
+}
+.hero-content{
+  background:rgba(0,0,0,.55); color:#fff;
+  border-radius:16px; width:min(700px,92%); padding:1.25rem 1.5rem;
+}
+.hero h1{ font-size:clamp(1.6rem,3vw + 1rem,3rem); margin-bottom:.6rem; }
+.hero p{ color:#e5e7eb; margin-bottom:1rem; }
+
+/* Buttons */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
+  padding:.85rem 1.15rem; border-radius:10px; border:0;
+  background:var(--brand); color:var(--brand-ink); font-weight:700; box-shadow:var(--shadow);
+}
+.btn:hover{ filter:brightness(.98); transform:translateY(-1px); }
+
+/* Features (grid: locked to 3 columns) */
+.features{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr)); /* desktop */
+  gap:1.5rem;
+  padding:2.5rem 0 3rem;
+}
+
+/* medium screens (tablets) → 2 columns */
+@media (max-width: 900px){
+  .features{
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+
+/* small screens (phones) → 1 column */
+@media (max-width: 600px){
+  .features{
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-card{
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  background:var(--card); border-radius:14px; padding:2rem; font-weight:600;
+  box-shadow:var(--shadow); transition:.2s ease; min-height:120px;
+}
+.feature-card:hover{ transform:translateY(-4px); background:var(--brand); color:var(--brand-ink); }
+
+/* Footer */
+footer{ margin-top:auto; padding:1rem; text-align:center; background:#111; color:#fff; }
+
+/* Responsive navbar menu */
+@media (max-width: 880px){
+  .hamburger{ display:inline-block; }
+  .nav-links{
+    position:absolute; right:.75rem; top:58px; padding:.6rem; flex-direction:column;
+    background:#0f1113; border:1px solid #222; border-radius:12px; display:none; width:210px;
+  }
+  .nav-links.show{ display:flex; }
+}
+
+/* Small tweaks */
+@media (max-width: 520px){
+  .hero-content{ padding:1rem 1.25rem; }
+}
+/* Target ONLY the Messages tab */
+.nav-links a[href="message.html"] {
+  position: relative;
+  padding-left: 2.2rem;         /* space for icon */
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  transition: .25s ease;
+}
+
+/* UI icon (paper-plane / post icon) */
+.nav-links a[href="message.html"]::before {
+  content: "✉️";               /* You can switch to 🚀 or 📝 or 💬 */
+  position: absolute;
+  left: .7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+/* Hover effect */
+.nav-links a[href="message.html"]:hover {
+  background: var(--brand);
+  color: var(--brand-ink);
+  transform: translateY(-2px);
+}
